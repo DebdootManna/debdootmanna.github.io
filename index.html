@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debdoot Manna - Musician & Developer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Pac-Man dots animation */
+        .dots {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #FFB897;
+            border-radius: 50%;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 4px solid #FFB897;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: #FFB897;
+            font-size: 2.5em;
+            text-shadow: 4px 4px #FF0000;
+            margin-bottom: 20px;
+        }
+
+        /* Main Content */
+        .content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .profile-section {
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 250px;
+            height: 250px;
+            border: 4px solid #FFB897;
+            margin-bottom: 20px;
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Navigation */
+        nav {
+            margin-top: 20px;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #000;
+            border: 2px solid #FFB897;
+            color: #FFB897;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            background-color: #FFB897;
+            color: #000;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border: 4px solid #FFB897;
+        }
+
+        h2 {
+            color: #FFB897;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 0.8em;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 4px solid #FFB897;
+        }
+
+        .visitor-counter {
+            font-size: 0.8em;
+            color: #FFB897;
+            margin-top: 20px;
+        }
+
+        /* Pac-Man Animation */
+        .pacman {
+            width: 30px;
+            height: 30px;
+            position: fixed;
+            bottom: 20px;
+            left: -30px;
+            background: #FFB897;
+            border-radius: 50%;
+            animation: movePacman 15s linear infinite;
+        }
+
+        @keyframes movePacman {
+            0% { left: -30px; }
+            100% { left: 100%; }
+        }
+
+        /* Ghost Animation */
+        .ghost {
+            width: 30px;
+            height: 30px;
+            position: fixed;
+            top: 20px;
+            right: -30px;
+            background: #FF0000;
+            border-radius: 15px 15px 0 0;
+            animation: moveGhost 12s linear infinite;
+        }
+
+        @keyframes moveGhost {
+            0% { right: -30px; }
+            100% { right: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated dots background -->
+    <div class="dots"></div>
+    
+    <!-- Pac-Man and Ghost animations -->
+    <div class="pacman"></div>
+    <div class="ghost"></div>
+
+    <div class="container">
+        <header>
+            <h1>DEBDOOT MANNA</h1>
+        </header>
+
+        <div class="content">
+            <div class="profile-section">
+                <div class="profile-img">
+                    <img src="photo.png" alt="Debdoot Manna">
+                </div>
+                <nav>
+                    <a href="https://www.instagram.com/themessengersmusic" class="nav-link">INSTAGRAM</a>
+                    <a href="https://x.com/DebdootManna" class="nav-link">TWITTER</a>
+                    <a href="https://github.com/DebdootManna" class="nav-link">GITHUB</a>
+                </nav>
+            </div>
+
+            <div class="main-content">
+                <section id="about">
+                    <h2>ABOUT ME</h2>
+                    <p>🎵 A musician who hacks computers 💻</p>
+                    <p>Hi there! I'm a cybersecurity enthusiast and electronic music producer, always eager to explore the intersection of technology and creativity.</p>
+                </section>
+
+                <section id="music">
+                    <h2>MY MUSIC</h2>
+                    <p>I'm crafting beats and melodies in the digital realm, combining my passion for technology with musical creativity.</p>
+                    <a href="https://debdootmanna.github.io/The-Messengers-Music" class="nav-link">Visit My Music Profile</a>
+                </section>
+
+                <section id="contact">
+                    <h2>CONTACT</h2>
+                    <p>Want to collaborate on music or tech projects? Feel free to reach out!</p>
+                    <p>Find me on social media or send me a message through any of the platforms above.</p>
+                </section>
+            </div>
+        </div>
+
+        <footer>
+            <div class="visitor-counter">
+                Visitors: <span id="visitorCount">0</span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Create random dots in the background
+        function createDots() {
+            const dotsContainer = document.querySelector('.dots');
+            for (let i = 0; i < 50; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                dot.style.left = Math.random() * 100 + '%';
+                dot.style.top = Math.random() * 100 + '%';
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        // Simple visitor counter simulation
+        function updateVisitorCount() {
+            const count = localStorage.getItem('visitorCount') || 0;
+            const newCount = parseInt(count) + 1;
+            localStorage.setItem('visitorCount', newCount);
+            document.getElementById('visitorCount').textContent = newCount;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createDots();
+            updateVisitorCount();
+        });
+    </script>
+</body>
+</html>
