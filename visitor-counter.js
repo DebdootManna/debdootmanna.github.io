@@ -1,53 +1,46 @@
-// Initialize Firebase (you'll need to add your Firebase configuration)
-const firebaseConfig = {
-    // Replace with your Firebase config
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
-};
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+// Initialize Supabase
+const SUPABASE_URL = 'https://gqylqxjhovdoeecucikg.supabase.co';  // Replace with your Supabase URL
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdxeWxxeGpob3Zkb2VlY3VjaWtnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk2OTYzNTEsImV4cCI6MjA0NTI3MjM1MX0.lY4_hxZ3qkRjxg5a5nY2yTVPLAb-ZPp6pRWEBId2m_o';  // Replace with your anon public key
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // Function to update visitor count
-function updateVisitorCount() {
-    const counterRef = db.collection('counters').doc('visitors');
-    
-    // Check if this is a new session
-    if (!sessionStorage.getItem('counted')) {
-        // Increment the counter in Firestore
-        counterRef.get().then((doc) => {
-            if (doc.exists) {
-                counterRef.update({
-                    count: firebase.firestore.FieldValue.increment(1)
-                });
-            } else {
-                counterRef.set({
-                    count: 1
-                });
-            }
-        }).catch((error) => {
-            console.error("Error updating counter: ", error);
-        });
-        
-        sessionStorage.setItem('counted', 'true');
-    }
-    
-    // Listen for real-time updates
-    counterRef.onSnapshot((doc) => {
-        if (doc.exists) {
-            const count = doc.data().count;
-            const countElement = document.getElementById('visitorCount');
-            if (countElement) {
-                countElement.textContent = count;
-            }
+async function updateVisitorCount() {
+    try {
+        // Fetch the current count from the 'visitors' table
+        let { data, error } = await supabase
+            .from('visitors')
+            .select('count')
+            .eq('id', 1);
+
+        if (error) {
+            console.error("Error fetching visitor count:", error);
+            return;
         }
-    });
+
+        if (data && data.length > 0) {
+            // Update the count
+            const newCount = data[0].count + 1;
+            await supabase
+                .from('visitors')
+                .update({ count: newCount })
+                .eq('id', 1);
+
+            // Display the new count
+            document.getElementById('visitorCount').textContent = newCount;
+        } else {
+            // If no record exists, initialize with count = 1
+            await supabase
+                .from('visitors')
+                .insert([{ id: 1, count: 1 }]);
+
+            document.getElementById('visitorCount').textContent = 1;
+        }
+    } catch (err) {
+        console.error("Error updating visitor count:", err);
+    }
 }
 
 // Call the function when the page loads
-document.addEventListener('DOMContentLoaded', updateVisitorCount);
+document.addEventListener('DOMContentLoaded', () => {
+    updateVisitorCount();
+});
