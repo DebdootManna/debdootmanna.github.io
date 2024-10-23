@@ -64,4 +64,4 @@ This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.
 
 Debdoot Manna - [@DebdootManna](https://twitter.com/DebdootManna)
 
-Project Link: [https://github.com/yourusername/your-repo-name](https://github.com/yourusername/your-repo-name)
+Project Link: [https://github.com/DebdootManna/debdootmanna.github.io](https://github.com/DebdootManna/debdootmanna.github.io)
