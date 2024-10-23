@@ -28,6 +28,32 @@
             position: relative;
         }
 
+        /* Pac-Man dots animation */
+        .dots {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #FFB897;
+            border-radius: 50%;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Header Section */
         header {
             text-align: center;
             padding: 40px 0;
@@ -42,6 +68,7 @@
             margin-bottom: 20px;
         }
 
+        /* Main Content */
         .content {
             display: grid;
             grid-template-columns: 300px 1fr;
@@ -66,6 +93,7 @@
             object-fit: cover;
         }
 
+        /* Navigation */
         nav {
             margin-top: 20px;
         }
@@ -87,6 +115,7 @@
             color: #000;
         }
 
+        /* Main Content Area */
         .main-content {
             background-color: rgba(0, 0, 0, 0.8);
             padding: 20px;
@@ -98,6 +127,12 @@
             margin-bottom: 20px;
         }
 
+        p {
+            margin-bottom: 15px;
+            font-size: 0.8em;
+        }
+
+        /* Footer */
         footer {
             text-align: center;
             padding: 20px;
@@ -109,9 +144,49 @@
             color: #FFB897;
             margin-top: 20px;
         }
+
+        /* Pac-Man Animation */
+        .pacman {
+            width: 30px;
+            height: 30px;
+            position: fixed;
+            bottom: 20px;
+            left: -30px;
+            background: #FFB897;
+            border-radius: 50%;
+            animation: movePacman 15s linear infinite;
+        }
+
+        @keyframes movePacman {
+            0% { left: -30px; }
+            100% { left: 100%; }
+        }
+
+        /* Ghost Animation */
+        .ghost {
+            width: 30px;
+            height: 30px;
+            position: fixed;
+            top: 20px;
+            right: -30px;
+            background: #FF0000;
+            border-radius: 15px 15px 0 0;
+            animation: moveGhost 12s linear infinite;
+        }
+
+        @keyframes moveGhost {
+            0% { right: -30px; }
+            100% { right: 100%; }
+        }
     </style>
 </head>
 <body>
+    <!-- Animated dots background -->
+    <div class="dots"></div>
+    
+    <!-- Pac-Man and Ghost animations -->
+    <div class="pacman"></div>
+    <div class="ghost"></div>
 
     <div class="container">
         <header>
@@ -121,6 +196,7 @@
         <div class="content">
             <div class="profile-section">
                 <div class="profile-img">
+                    <!-- Profile image of Debdoot -->
                     <img src="photo.png" alt="Debdoot Manna">
                 </div>
                 <nav>
@@ -137,6 +213,11 @@
                     <p>Hi there! I'm a cybersecurity enthusiast and electronic music producer, always eager to explore the intersection of technology and creativity.</p>
                 </section>
 
+                <section id="projects">
+                    <h2>MY PROJECTS</h2>
+                    <p>I develop tech projects that intersect with art, cybersecurity, and digital music. Stay tuned for my upcoming creations.</p>
+                </section>
+
                 <section id="music">
                     <h2>MY MUSIC</h2>
                     <p>I'm crafting beats and melodies in the digital realm, combining my passion for technology with musical creativity.</p>
@@ -151,7 +232,6 @@
             </div>
         </div>
 
-        <!-- Visitor Counter -->
         <footer>
             <div class="visitor-counter">
                 Visitors: <span id="visitorCount">0</span>
@@ -159,9 +239,32 @@
         </footer>
     </div>
 
-    <!-- Supabase Script -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script src="visitor-counter.js"></script>
+    <script>
+        // Create random dots in the background
+        function createDots() {
+            const dotsContainer = document.querySelector('.dots');
+            for (let i = 0; i < 50; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                dot.style.left = Math.random() * 100 + '%';
+                dot.style.top = Math.random() * 100 + '%';
+                dotsContainer.appendChild(dot);
+            }
+        }
 
+        // Simple visitor counter simulation
+        function updateVisitorCount() {
+            const count = localStorage.getItem('visitorCount') || 0;
+            const newCount = parseInt(count) + 1;
+            localStorage.setItem('visitorCount', newCount);
+            document.getElementById('visitorCount').textContent = newCount;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createDots();
+            updateVisitorCount();
+        });
+    </script>
 </body>
 </html>
